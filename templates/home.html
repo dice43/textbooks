@@ -1,5 +1,29 @@
-{% extends "layout.html" %}
-{% block content %}
-    <h2>{{ subtitle }}</h2>
-    <p>{{ text }}</p>
-{% endblock content %}
+{% extends "layout.html" %} {% block content %}<html>
+
+<head>
+    <meta name="viewport" content="width=device-width, initial-  
+        scale=1">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="/static/main.css">
+    <style>
+        body {
+            background-image: url("/static/image/bookImg.png");
+            background-repeat: no-repeat; 
+            background-attachment: fixed; 
+            background-size: cover; 
+        }
+        
+    </style>
+</head>
+
+<body>
+    <h2 class="welc">{{ subtitle }}</h2>
+    <p class="home_text">{{ text }}</p>
+    <form class="search" method="post" action="" style="margin:auto;max-width:600px">
+        <input type="text" placeholder="Search by name or ISBN number" name="isbn">
+        <button type="submit"><i class="fa fa-search"></i>
+        </button>
+    </form>
+</body>
+
+</html>{% endblock content %}

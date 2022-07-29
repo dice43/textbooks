@@ -1,9 +1,10 @@
-from flask import Flask, render_template, url_for, flash, redirect
-from forms import RegistrationForm
+from flask import Flask, render_template, url_for, flash, redirect, request
+from forms import RegistrationForm, TextSearchForm
 from login import LoginForm
 from flask_behind_proxy import FlaskBehindProxy
 from flask_sqlalchemy import SQLAlchemy
 from flask_bcrypt import Bcrypt
+import requests
 
 app = Flask(__name__)                    # this gets the name of the file so Flask knows it's name
 proxied = FlaskBehindProxy(app)  ## add this line
@@ -22,9 +23,23 @@ class User(db.Model):
   def __repr__(self):
     return f"User('{self.username}', '{self.email}')"
 
-@app.route("/")                          # this tells you the URL the method below is related to
+class Books(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    isbn = db.Column(db.String(20), nullable=False)
+    title = db.Column(db.String(100), nullable=False)
+    author = db.Column(db.String(50), nullable=False)
+    year = db.Column(db.String(50), nullable=False)
+
+    def __repr__(self):
+        return f"Textbook('{self.title}') has a isbn number of('{self.isbn}')"
+
+@app.route("/", methods=['GET', 'POST'])                          # this tells you the URL the method below is related to
 def home():
-    return render_template('home.html', subtitle='Home Page', text='This is the home page')      # this prints HTML to the webpage
+    search = TextSearchForm(request.form)
+    if request.method == "POST":
+        return results(search)
+
+    return render_template('home.html', subtitle='Welcome to Student-Xchange', text='Browse for textbooks')      # this prints HTML to the webpage
 
 @app.route("/second_page")
 def second_page():
@@ -83,6 +98,23 @@ def user():
     else:
         subtitle = f'Hello {name}'
         text = 'You are logged in to the user page'
-    return render_template('user_page.html', subtitle=subtitle, text=text )
+    return render_template('user_page.html', subtitle=subtitle, text=text)
+@app.route("/results", methods=["POST"])
+def results(search):
+    isbn = request.form["isbn"] 
+    #link = "https://openlibrary.org/isbn/"
+    #data = requests.get(link + isbn + ".json").json()   
+    link = f"https://openlibrary.org/api/books?bibkeys=ISBN:{isbn}&jscmd=data&format=json"
+    data = requests.get(link).json()[f'ISBN:{isbn}']
+    subtitle = f"Search results for {data['title']}"
+    
+    imgPath = None
+    try:
+        imgPath = data['cover']['large']
+    except:
+        imgPath = "https://via.placeholder.com/200x300"
+
+
+    return render_template('results.html', subtitle=subtitle, bookInfo=data, img=imgPath)
 if __name__ == '__main__':               # this should always be at the end
     app.run(debug=True, host="0.0.0.0")
