@@ -1,38 +1,52 @@
-{% extends "layout.html" %}
-{% block content %}
+{% extends "layout.html" %} {% block content %}
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
 <body>
-<style>
-    h2 {
-        width:auto;
-        background-color: linear-gradient(to right, #feaa66, #c68f9c, #9970cb, #c68f9c, #feaa66);
-        padding:20px;
-        color: #6141ac;
-        text-shadow: 0px 3px 0px #fdae77,
-                 0px 14px 10px rgba(0,0,0,0.15),
-                 0px 24px 2px rgba(0,0,0,0.1),
-                 0px 34px 30px rgba(0,0,0,0.1);
-    }
-    p {
-        text-size: 125%;
-    }
-    body { background-image: linear-gradient(to right, #feaa66, #c68f9c, #9970cb, #c68f9c, #feaa66); }
-</style>
+    <style>
+        h2 {
+            width: auto;
+            background-color: linear-gradient(to right, #feaa66, #c68f9c, #9970cb, #c68f9c, #feaa66);
+            padding: 20px;
+            color: #fdae77;
+            text-shadow: 0px 6px 5px rgba(0,0,0,0.4),
+               0px 10px 5px rgba(0,0,0,0.1),
+               0px 20px 25px rgba(0,0,0,0.1);
+        }
+
+        p {
+            text-size: 125%;
+            color: #ffffff;
+            text-shadow: 0px 6px 5px rgba(0,0,0,0.4),
+             0px 10px 5px rgba(0,0,0,0.1),
+             0px 20px 25px rgba(0,0,0,0.1);
+        }
+
+        body {
+            background-image: linear-gradient(to right, #feaa66, #c68f9c, #9970cb, #c68f9c, #feaa66);
+        }
+    </style>
 </body>
-<h2><center>{{ subtitle }}<center></h2>
+<h2>
+    <center>{{ subtitle }}
+        <center>
+</h2>
 <p>{{ text }}</p>
 
-<div style="display:inline-block;horizontal-align:left;">
-    <img src = {{img}} style="horizontal-align: left">
-</div>
-<div style="display:inline-block;vertical-align:top;">
-    {% for author in bookInfo['authors'] %}
-        <p>Author: {{ author['name'] }}</p>
-    {% endfor %}
-    {% for publisher in bookInfo['publishers'] %}
-        <p>Publisher: {{ publisher['name'] }}</p>
-    {% endfor %}
-    <p>Publishing Date: {{ bookInfo['publish_date'] }}</p>
-</div>
+
+<div class="column contentbox">
+      <div class = "book"><b>{{ bookInfo['title'] }}</b> </div> 
+        <img class = "results" src="{{ img }}" style ="width:100%">
+      </a>
+      <p><b>Authors:</b></p>
+      {% for author in bookInfo['authors'] %}
+        <p><b></b> {{ author['name'] }}</p>
+      {% endfor %}
+      {% for publisher in bookInfo['publishers'] %}
+        <p><b> Publishers:</b> {{publisher['name']}}</p>
+      {% endfor %}
+        <p><b> Publishing Date:</b> {{bookInfo['publish_date']}}</p>
+        <p><b> ISBN:</b> {{isbn}}</p>
+   
+      </div>
 
 {% endblock content %}

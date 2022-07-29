@@ -115,6 +115,6 @@ def results(search):
         imgPath = "https://via.placeholder.com/200x300"
 
 
-    return render_template('results.html', subtitle=subtitle, bookInfo=data, img=imgPath)
+    return render_template('results.html', subtitle=subtitle, bookInfo=data, img=imgPath, isbn=isbn)
 if __name__ == '__main__':               # this should always be at the end
     app.run(debug=True, host="0.0.0.0")

@@ -180,3 +180,42 @@ div.form-group-fields {
   background-color: #6141ac;
   border-color: #6141ac;
 }
+.center {
+  display: table;
+  margin-left: auto;
+  margin-right: auto;
+  
+}
+
+.column{
+  float: center;
+  margin-left: auto;
+  margin-right: auto;
+  width: 30%;
+  padding: 2px;
+}
+
+.contentbox{
+  box-sizing: content-box;
+  width: 25%;
+  height: auto;
+  background-color: linear-gradient(to right, #feaa66, #c68f9c, #9970cb, #c68f9c, #feaa66);
+  box-shadow: rgba(0, 0, 0, 0.25) 0px 54px 55px, rgba(0, 0, 0, 0.12) 0px -12px 30px, rgba(0, 0, 0, 0.12) 0px 4px 6px, rgba(0, 0, 0, 0.17) 0px 12px 13px, rgba(0, 0, 0, 0.09) 0px -3px 5px;  text-align: center;
+}
+
+.book{
+  text-align: center;
+  color: #ffffff;
+  text-shadow: 0px 6px 5px rgba(0,0,0,0.4),
+               0px 10px 5px rgba(0,0,0,0.1),
+               0px 20px 25px rgba(0,0,0,0.1);
+  font-size: 150%;
+  text-align: center;
+}
+
+.results{
+    object-fit: contain;
+    margin: 0px;
+    width: 200%;
+    height: 75%;
+}
