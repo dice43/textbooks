@@ -195,6 +195,14 @@ div.form-group-fields {
   padding: 2px;
 }
 
+.savebtn{
+  float: right;
+  margin-left: auto;
+  margin-right: auto;
+  width:20%;
+  
+}
+
 .contentbox{
   box-sizing: content-box;
   width: 25%;

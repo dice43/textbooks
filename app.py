@@ -25,13 +25,11 @@ class User(db.Model):
 
 class Books(db.Model):
     id = db.Column(db.Integer, primary_key=True)
-    isbn = db.Column(db.String(20), nullable=False)
-    title = db.Column(db.String(100), nullable=False)
-    author = db.Column(db.String(50), nullable=False)
-    year = db.Column(db.String(50), nullable=False)
+    isbn = db.Column(db.String(13), nullable=False)
+    email = db.Column(db.String(100), nullable=False)
 
     def __repr__(self):
-        return f"Textbook('{self.title}') has a isbn number of('{self.isbn}')"
+        return f"User with email('{self.email}') has saved a textbook with an isbn number of('{self.isbn}')"
 
 @app.route("/", methods=['GET', 'POST'])                          # this tells you the URL the method below is related to
 def home():
@@ -88,16 +86,21 @@ def login():
             else:
                 flash('You have input the incorrect login information or password')
     return render_template('signin.html', title='Log In', form=login)
-@app.route("/user")
+@app.route("/user", methods=['GET','POST'])
 def user():
+    search = TextSearchForm(request.form)
+    if request.method == "POST":
+        return results(search)
+
     subtitle = ''
     text = ''
+
     if name is None:
         subtitle = 'Hello User'
         text = 'You have not logged in to the user page'
     else:
         subtitle = f'Hello {name}'
-        text = 'You are logged in to the user page'
+        text = 'You are logged in to the user page! Search for textbooks below'
     return render_template('user_page.html', subtitle=subtitle, text=text)
 @app.route("/results", methods=["POST"])
 def results(search):
@@ -113,8 +116,20 @@ def results(search):
         imgPath = data['cover']['large']
     except:
         imgPath = "https://via.placeholder.com/200x300"
-
-
     return render_template('results.html', subtitle=subtitle, bookInfo=data, img=imgPath, isbn=isbn)
+@app.route("/save", methods=["POST"])
+def save_to_database():
+
+    saved_book = request.form["saveBtn"]
+
+    if name is None:
+        return redirect(url_for("login"))
+    else:
+        current_user = User.query.filter_by(username=name).first()
+        book = Books(isbn=saved_book, email=current_user.email)
+        db.session.add(book)
+        db.session.commit()
+
+    return render_template("saved.html")
 if __name__ == '__main__':               # this should always be at the end
     app.run(debug=True, host="0.0.0.0")
