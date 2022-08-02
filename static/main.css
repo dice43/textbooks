@@ -271,3 +271,7 @@ div.form-group-fields {
     color: black;
     background-color: linear-gradient(to right, #feaa66, #c68f9c, #9970cb, #c68f9c, #feaa66);
 }
+
+.padding-Cols td {
+  padding: 0 15px;
+}

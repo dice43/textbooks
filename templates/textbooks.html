@@ -1,0 +1,79 @@
+{% extends "layout.html" %}
+{% block content %}
+
+<head>
+    <title>Available Textbooks</title>
+    <style type="text/css" media="screen">
+        table{
+            margin-left:auto;
+            margin-right:auto;
+            border-collapse:collapse;
+            border:2px solid white;
+}
+        table td{
+            border:2px solid white;
+}
+        table th{
+            border:2px solid white;
+            text-align: center
+        }
+    </style>
+</head>
+
+<body>
+
+    <style>
+        h1,h2 {
+            width: auto;
+            background-color: linear-gradient(to right, #feaa66, #c68f9c, #9970cb, #c68f9c, #feaa66);
+            padding: 20px;
+            color: #fdae77;
+            text-shadow: 0px 6px 5px rgba(0,0,0,0.4),
+               0px 10px 5px rgba(0,0,0,0.1),
+               0px 20px 25px rgba(0,0,0,0.1);
+        }
+
+        h3{
+            text-size: 200%;
+            text-align:center;
+            color: #fdae77;
+            text-shadow: 0px 6px 5px rgba(0,0,0,0.4),
+             0px 10px 5px rgba(0,0,0,0.1),
+             0px 20px 25px rgba(0,0,0,0.1);
+        }
+
+        p {
+            text-size: 300%;
+            color: #ffffff;
+            text-shadow: 0px 6px 5px rgba(0,0,0,0.4),
+             0px 10px 5px rgba(0,0,0,0.1),
+             0px 20px 25px rgba(0,0,0,0.1); 
+        }
+
+        body {
+            background-image: linear-gradient(to right, #feaa66, #c68f9c, #9970cb, #c68f9c, #feaa66);
+        }
+    </style>
+    <div class="h2block">
+        <h2 style="text-align:center;">These are copies of the textbooks that have been made available by other students</h2>
+        
+        <div class="h2block padding-Cols">
+        <table>
+        <tr> 
+            <th><p style="font-size:20px">Title:</p></th> 
+            <th><p style="font-size:20px">ISBN:</p></th> 
+        </tr>
+  
+        {% for book in books %}
+        <tr>
+            <td><p style="text-algin:left;">{{ book.title }}</p></td>
+            <td><p>{{ book.isbn }}<p></td>
+        </tr>
+        {% endfor %}
+        </table>
+    </div>
+    </div>
+
+</body>
+
+{% endblock content %}

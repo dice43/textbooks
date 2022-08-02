@@ -153,5 +153,9 @@ def database_query():
         title = query_book.title
 
     return render_template("query_results.html", email=email, title=title)
+@app.route("/available")
+def available_books():
+    books = Books.query.all()
+    return render_template("textbooks.html", books=books)
 if __name__ == '__main__':               # this should always be at the end
     app.run(debug=True, host="0.0.0.0")
