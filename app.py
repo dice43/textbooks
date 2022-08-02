@@ -142,7 +142,7 @@ def database_query():
     query_book = None
 
     if name is None:
-        return redirect(url_for("login:"))
+        return redirect(url_for("login"))
     else:
         query_book = Books.query.filter_by(isbn=searched_book).first()
     
