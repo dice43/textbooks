@@ -195,19 +195,48 @@ div.form-group-fields {
   padding: 2px;
 }
 
-.savebtn{
-  float: right;
+.btnblock{
+  float: center;
+  vertical-align: top;
   margin-left: auto;
   margin-right: auto;
-  width:20%;
+  width:10%;
+  height:auto;
+  padding:2px;
+
+}
+.btnblock1{
   
+  float: center;
+  vertical-align: top;
+  margin-left: auto;
+  margin-right: auto;
+  width:10%;
+  height:auto;
+  padding:2px;
+}
+
+.h1block{
+  background-color:#ac75ba;
+  border: 2px solid #ffffff;
+  width:30%;
+  margin-left: auto;
+  margin-right: auto;
+  padding:2px;
+}
+
+.h2block{
+  background-color:#ac75ba;
+  border: 2px solid #ffffff;
 }
 
 .contentbox{
+  
   box-sizing: content-box;
   width: 25%;
   height: auto;
   background-color: linear-gradient(to right, #feaa66, #c68f9c, #9970cb, #c68f9c, #feaa66);
+  border: 2px solid #ffffff;
   box-shadow: rgba(0, 0, 0, 0.25) 0px 54px 55px, rgba(0, 0, 0, 0.12) 0px -12px 30px, rgba(0, 0, 0, 0.12) 0px 4px 6px, rgba(0, 0, 0, 0.17) 0px 12px 13px, rgba(0, 0, 0, 0.09) 0px -3px 5px;  text-align: center;
 }
 
@@ -226,4 +255,19 @@ div.form-group-fields {
     margin: 0px;
     width: 200%;
     height: 75%;
+}
+
+.parent {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.child {
+  display: inline-block;
+}
+
+.fa-search {
+    color: black;
+    background-color: linear-gradient(to right, #feaa66, #c68f9c, #9970cb, #c68f9c, #feaa66);
 }

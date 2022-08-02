@@ -1,12 +1,9 @@
-{% extends "layout.html" %}
-{% block content %}
-
+{% extends "layout.html" %} {% block content %}
 <head>
-    <title>Book Saved</title>
+  <title>Search Result | Student-Xchange</title>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 </head>
-
 <body>
-
     <style>
         h1,h2 {
             width: auto;
@@ -32,9 +29,12 @@
         }
     </style>
     <div class="h2block">
-        <h2>Your email has been input into the database as a owner of the textbook. Check your email frequently as other students may contact you for the textbook</h2>
+
+        {% if email is none %}
+            <h3>The textbook hasn't been submitted by another student yet. Check back again soon!</h3>
+        {% else %}
+            <h3>The textbook {{ title }} has been submitted by another sudent with the email: {{ email }}<br></br> Contact them about receiving your textbook!</h3>
+        {% endif %}
     </div>
-
 </body>
-
 {% endblock content %}

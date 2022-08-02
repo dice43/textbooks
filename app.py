@@ -13,7 +13,7 @@ app.config['SECRET_KEY'] = '39e544a7b87e65b3d845915b1533104f'
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///site.db'
 db = SQLAlchemy(app)
 name = None
-
+bookSearch = None
 class User(db.Model):
   id = db.Column(db.Integer, primary_key=True)
   username = db.Column(db.String(20), unique=True, nullable=False)
@@ -27,6 +27,7 @@ class Books(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     isbn = db.Column(db.String(13), nullable=False)
     email = db.Column(db.String(100), nullable=False)
+    title = db.Column(db.String(100), nullable=False)
 
     def __repr__(self):
         return f"User with email('{self.email}') has saved a textbook with an isbn number of('{self.isbn}')"
@@ -109,8 +110,11 @@ def results(search):
     #data = requests.get(link + isbn + ".json").json()   
     link = f"https://openlibrary.org/api/books?bibkeys=ISBN:{isbn}&jscmd=data&format=json"
     data = requests.get(link).json()[f'ISBN:{isbn}']
-    subtitle = f"Search results for {data['title']}"
+    subtitle = f"Search result for {data['title']}"
     
+    global bookSearch
+    bookSearch = data
+
     imgPath = None
     try:
         imgPath = data['cover']['large']
@@ -126,10 +130,28 @@ def save_to_database():
         return redirect(url_for("login"))
     else:
         current_user = User.query.filter_by(username=name).first()
-        book = Books(isbn=saved_book, email=current_user.email)
+        book = Books(isbn=saved_book, email=current_user.email, title=bookSearch['title'])
         db.session.add(book)
         db.session.commit()
 
     return render_template("saved.html")
+@app.route("/database-search", methods=["POST"])
+def database_query():
+    
+    searched_book = request.form["searchBtn"]
+    query_book = None
+
+    if name is None:
+        return redirect(url_for("login:"))
+    else:
+        query_book = Books.query.filter_by(isbn=searched_book).first()
+    
+    email = None
+    title = None
+    if query_book is not None:
+        email = query_book.email
+        title = query_book.title
+
+    return render_template("query_results.html", email=email, title=title)
 if __name__ == '__main__':               # this should always be at the end
     app.run(debug=True, host="0.0.0.0")

@@ -1,9 +1,11 @@
 {% extends "layout.html" %} {% block content %}
+<head>
+  <title>Search Result | Student-Xchange</title>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-
+</head>
 <body>
     <style>
-        h2 {
+        h1,h2 {
             width: auto;
             background-color: linear-gradient(to right, #feaa66, #c68f9c, #9970cb, #c68f9c, #feaa66);
             padding: 20px;
@@ -26,14 +28,28 @@
         }
     </style>
 </body>
+<div class="h2block">
 <h2>
     <center>{{ subtitle }}
         <center>
 </h2>
+</div>
 <p>{{ text }}</p>
 
+<div class="parent">
 
-<div class="column contentbox">
+<div class="h1block" style="background-color:#ac75ba;">
+  <h1 style="color:#fdae77">Please click this button if you wish to search the database and check if a student has entered it</h1>
+<div class="btnblock1 child">
+  
+<form action="/database-search" method='POST'>
+        <button name="searchBtn" type="submit" value="{{ isbn }}" user="" style="width:1065%;"><i class="fa fa-search fa-4x" style="color:#6141ac"></i></button>
+   
+      </form>
+</div>
+</div>
+
+<div class="column contentbox child">
       <div class = "book"><b>{{ bookInfo['title'] }}</b> </div> 
         <img class = "results" src="{{ img }}" style ="width:100%">
       </a>
@@ -49,10 +65,14 @@
    
       </div>
 
-<div class="savebtn">
+<div class="h1block">
+  <h1 style="color:#fdae77">Please click this button if you have this textbook and are willing to give it to another student</h1>
+<div class="btnblock child" style="horizontal-align:center;">
 <form action="/save" method='POST'>
-        <button name="saveBtn" type="submit" value="{{ isbn }}" user=""><i class="fa fa-floppy-io fa-lg"></i></button>
+        <button name="saveBtn" type="submit" value="{{ isbn }}" user="" style="width:1065%;"><i class="fa fa-floppy-o fa-4x" style="color:#6141ac"></i></button>
    
       </form>
+</div>
+</div>
 </div>
 {% endblock content %}
