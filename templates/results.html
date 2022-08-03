@@ -53,12 +53,12 @@
       <div class = "book"><b>{{ bookInfo['title'] }}</b> </div> 
         <img class = "results" src="{{ img }}" style ="width:100%">
       </a>
-      <p><b>Authors:</b></p>
+      <p><b>Author(s):</b></p>
       {% for author in bookInfo['authors'] %}
         <p><b></b> {{ author['name'] }}</p>
       {% endfor %}
       {% for publisher in bookInfo['publishers'] %}
-        <p><b> Publishers:</b> {{publisher['name']}}</p>
+        <p><b> Publisher(s):</b> {{publisher['name']}}</p>
       {% endfor %}
         <p><b> Publishing Date:</b> {{bookInfo['publish_date']}}</p>
         <p><b> ISBN:</b> {{isbn}}</p>
